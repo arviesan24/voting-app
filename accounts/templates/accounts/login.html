@@ -1,36 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base_form.html' %}
 {% load socialaccount %}
 
 {% block title %}Login{% endblock title %}
 
-{% block content %}
-  <div class="row">
-    <div class="col-md-4 offset-md-4">
-      <form action="" method="post">
-        <div class="card">
-          <div class="card-header"><h2>Login</h2></div>
-          <div class="card-body block">
-            {% csrf_token %}
-            <label for="id_login" class="mt-3">Username:</label>
-            {{ form.login }}
-            {{ form.login.errors }}
-            <label for="id_password" class="mt-3">Password:</label>
-            {{ form.password }}
-            {{ form.password.errors }}
-            <label for="id_remember" class="mt-3">Remember Me:</label>
-            {{ form.remember }}
-            {{ form.remember.errors }}
-            <input type="submit" class="btn btn-primary mt-3" value="Login" />
-            {{ form.non_field_errors }}
-          </div>
-          <div class="card-footer">
-            <div class="row">
-              <div class="col-6"><a href="{% provider_login_url 'google' %}" class="btn btn-danger btn-block"><i class="fa fa-google" aria-hidden="true"></i> Google</a></div>
-              <div class="col-6"><a href="{% provider_login_url 'facebook' %}" class="btn btn-primary btn-block"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a></div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
+{% block form_title %}Login{% endblock form_title %}
+
+{% block card_body %}
+  <small class="text-muted">Please sign in with one of your existing third party accounts. Or, <a href="{% url 'accounts:signup' %}">sign up</a> for a voting.com account and sign in below:</small>
+  <div class="row my-1">
+    <div class="col-sm-6 mt-2"><a href="{% provider_login_url 'google' %}" class="btn btn-danger btn-block"><i class="fa fa-google" aria-hidden="true"></i> Google</a></div>
+    <div class="col-sm-6 mt-2"><a href="{% provider_login_url 'facebook' %}" class="btn btn-primary btn-block"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a></div>
   </div>
-{% endblock content %}
+  {% csrf_token %}
+  <label for="id_login" class="mt-3">Username:</label>
+  {{ form.login }}
+  <small class="text-danger">{{ form.login.errors }}</small>
+  <label for="id_password" class="mt-3">Password:</label>
+  {{ form.password }}
+  <small class="text-danger">{{ form.password.errors }}</small>
+  <label for="id_remember" class="mt-3">Remember Me:</label>
+  {{ form.remember }}
+  <small class="text-danger">{{ form.remember.errors }}</small>
+{% endblock card_body %}
+
+
+{% block card_footer %}
+  <small><a href="{% url 'accounts:password_reset' %}">Forgot Password?</a></small>
+  <input type="submit" class="btn btn-primary btn-block" value="Login" />
+{% endblock card_footer %}

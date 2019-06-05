@@ -1,0 +1,20 @@
+{% extends "account/base_form.html" %}
+
+{% load i18n %}
+{% load account %}
+
+{% block title %}{% trans "Account Inactive" %}{% endblock title %}
+
+{% block form_title %}{% trans "Account Inactive" %}{% endblock form_title %}
+
+{% block card_body %}
+  {% if user.is_authenticated %}
+    {% include "account/snippets/already_logged_in.html" %}
+  {% endif %}
+  
+  <p>{% trans "This account is inactive." %}</p>
+{% endblock card_body %}
+
+{% block card_footer %}
+  <a href="{% url 'home' %}" class="btn btn-primary btn-block">{% trans 'Home' %}</a>
+{% endblock card_footer %}
