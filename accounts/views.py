@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
@@ -22,6 +23,3 @@ class SignupFormView(SignupView):
     form_class = forms.UserSignupForm
     template_name = 'accounts/signup.html'
     success_url = reverse_lazy('accounts:login')
-
-
-class ProfileDetailView():
