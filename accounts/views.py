@@ -21,6 +21,12 @@ class LoginFormView(LoginView):
     success_url = reverse_lazy('accounts:profile')
 
 
+class LogoutFormView(LogoutView):
+    """User logout view."""
+
+    template_name = 'accounts/logout.html'
+
+
 class SignupFormView(SignupView):
     """User signup view."""
 
