@@ -7,6 +7,7 @@ from django.views.generic.detail import DetailView
 
 from allauth.account.forms import LoginForm
 from allauth.account.views import LoginView
+from allauth.account.views import PasswordResetView
 from allauth.account.views import SignupView
 
 from . import forms
@@ -35,3 +36,5 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     def get_object(self):
         """Return object to be displayed by view."""
         return self.request.user
+
+
