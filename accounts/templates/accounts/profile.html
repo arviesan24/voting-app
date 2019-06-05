@@ -2,6 +2,16 @@
 
 {% block title %}Profile{% endblock title %}
 
+{% block css %}
+.profile_image {
+  width: 50px;
+  length: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+{% endblock css %}
+
 {% block content %}
 <div class="row">
   <div class="col-md-4 offset-md-4">
@@ -11,10 +21,20 @@
       </div>
       <div class="card-body">
         {% if user.is_authenticated %}
+          <img class="profile_image" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
           <p>Welcome {{ user.username }}</p>
           <p>Your First name is {{ user.first_name }}</p>
           <p>Your Last name is {{ user.last_name }}</p>
-          <p><a href="{% url 'account_logout' %}">Log out</a>
+          <div class="row">
+            <div class="col-sm-6">
+              {% if not user.socialaccount_set.all.0.provider %}
+                <a href="{% url 'accounts:change_password' %}" class="btn btn-sm btn-outline-success btn-block">Change Password</a>
+              {% endif %}
+            </div>
+            <div class="col-sm-6">
+              <a href="{% url 'accounts:logout' %}" class="btn btn-sm btn-outline-warning btn-block">Log out</a>
+            </div>
+          </div>
         {% endif %}
       </div>
     </div>
