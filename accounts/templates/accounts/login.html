@@ -1,6 +1,8 @@
 {% extends 'accounts/base_form.html' %}
 {% load socialaccount %}
 
+{% block title %}Login{% endblock title %}
+
 {% block form_title %}Login{% endblock form_title %}
 
 {% block card_body %}
@@ -23,5 +25,6 @@
 
 
 {% block card_footer %}
+  <small><a href="{% url 'accounts:password_reset' %}">Forgot Password?</a></small>
   <input type="submit" class="btn btn-primary btn-block" value="Login" />
 {% endblock card_footer %}
