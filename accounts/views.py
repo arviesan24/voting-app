@@ -25,3 +25,13 @@ class SignupFormView(SignupView):
     form_class = forms.UserSignupForm
     template_name = 'accounts/signup.html'
     success_url = reverse_lazy('accounts:login')
+
+
+class ProfileDetailView(LoginRequiredMixin, DetailView):
+    """Profile view of the user."""
+
+    template_name = 'accounts/profile.html'
+
+    def get_object(self):
+        """Return object to be displayed by view."""
+        return self.request.user
