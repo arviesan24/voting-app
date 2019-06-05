@@ -39,3 +39,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         return self.request.user
 
 
+class PasswordResetFormView(PasswordResetView):
+    """View for Reset Password."""
+
+    template_name = 'accounts/password_reset.html'
