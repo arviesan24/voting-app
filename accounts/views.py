@@ -43,3 +43,9 @@ class PasswordResetFormView(PasswordResetView):
     """View for Reset Password."""
 
     template_name = 'accounts/password_reset.html'
+
+
+class PasswordChangeFormView(LoginRequiredMixin, PasswordChangeView):
+    """View for change Password."""
+
+    template_name = 'accounts/change_password.html'
