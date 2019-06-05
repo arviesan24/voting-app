@@ -11,7 +11,7 @@ from allauth.account.views import SignupView
 
 from . import forms
 
-class LoginFormView(FormView):
+class LoginFormView(LoginView):
     """User login view."""
 
     form_class = LoginForm
