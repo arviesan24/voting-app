@@ -49,3 +49,4 @@ class PasswordChangeFormView(LoginRequiredMixin, PasswordChangeView):
     """View for change Password."""
 
     template_name = 'accounts/change_password.html'
+    success_url = reverse_lazy('accounts:profile')
