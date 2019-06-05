@@ -16,7 +16,6 @@ from . import forms
 class LoginFormView(LoginView):
     """User login view."""
 
-    form_class = LoginForm
     template_name = 'accounts/login.html'
     success_url = reverse_lazy('accounts:profile')
 
