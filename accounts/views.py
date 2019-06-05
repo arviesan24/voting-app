@@ -7,6 +7,7 @@ from django.views.generic.detail import DetailView
 
 from allauth.account.forms import LoginForm
 from allauth.account.views import LoginView
+from allauth.account.views import LogoutView
 from allauth.account.views import PasswordChangeView
 from allauth.account.views import PasswordResetView
 from allauth.account.views import SignupView
