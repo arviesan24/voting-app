@@ -24,6 +24,8 @@ from rest_framework import routers
 from polls import views
 
 
+router = routers.DefaultRouter()
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('allauth/', include('allauth.urls')),
