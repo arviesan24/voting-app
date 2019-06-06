@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'rest_framework',
 
     # allauth's enabled providers
     'allauth.socialaccount.providers.facebook',
@@ -63,7 +64,7 @@ ACCOUNT_FORMS = {
 }
 
 #
-#
+# Email Settings
 #
 
 EMAIL_BACKEND = os.getenv(
@@ -114,6 +115,51 @@ AUTHENTICATION_BACKENDS = (
 WSGI_APPLICATION = 'voting.wsgi.application'
 
 
+#
+# PROTOCOL TO USE
+#
+
+USE_HTTPS = json.loads(os.getenv('USE_HTTPS', 'true'))
+
+CURRENT_PROTOCOL = 'http://'
+
+if USE_HTTPS:
+    CURRENT_PROTOCOL = 'https://'
+
+
+#
+# DOMAIN NAME TO USE
+#
+
+CURRENT_DOMAIN = os.getenv('CURRENT_DOMAIN', '127.0.0.1:8000/')
+
+
+#
+# API ROOT URL
+#
+
+API_ROOT_URL = f'{CURRENT_PROTOCOL}{CURRENT_DOMAIN}api/'
+
+
+#
+# REST_FRAMEWORK SETTINGS
+#
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 100
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -161,4 +207,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.getenv(
+    'STATIC_ROOT',
+    os.path.join(BASE_DIR, 'public', 'static'))
+
+STATIC_URL = os.getenv('STATIC_URL', '/static/')
+
+MEDIA_ROOT = os.getenv(
+    'MEDIA_ROOT',
+    os.path.join(BASE_DIR, 'public', 'media'))
+
+MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
