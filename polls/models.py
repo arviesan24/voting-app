@@ -22,5 +22,6 @@ class Choice(models.Model):
         related_name='choices',
         related_query_name='choice')
     name = models.TextField(blank=False)
+    votes = GenericRelation(Vote)
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
