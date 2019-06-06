@@ -40,7 +40,7 @@ class IsChoiceOwnerOrReadOnly(permissions.BasePermission):
 
 
 class PollViewSet(viewsets.ModelViewSet):
-    """Viewset for PollSerializer"""
+    """Viewset for PollSerializer."""
 
     queryset = models.Poll.objects.all()
     serializer_class = serializers.PollSerializer
@@ -48,7 +48,7 @@ class PollViewSet(viewsets.ModelViewSet):
 
 
 class ChoiceViewSet(viewsets.ModelViewSet):
-    """Viewset for ChoiceSerializer"""
+    """Viewset for ChoiceSerializer."""
 
     queryset = models.Choice.objects.all()
     serializer_class = serializers.ChoiceSerializer
