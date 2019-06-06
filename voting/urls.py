@@ -32,6 +32,11 @@ urlpatterns = [
     path('polls/',
         include(('polls.urls', 'polls'), namespace='polls')),
     path('', views.PollListView.as_view(), name='home'),
+
+    # DRF URLs
+    path('api/', include(router.urls)),
+    path('api-auth/',
+        include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 
