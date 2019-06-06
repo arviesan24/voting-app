@@ -134,6 +134,13 @@ if USE_HTTPS:
 CURRENT_DOMAIN = os.getenv('CURRENT_DOMAIN', '127.0.0.1:8000/')
 
 
+#
+# API ROOT URL
+#
+
+API_ROOT_URL = f'{CURRENT_PROTOCOL}{CURRENT_DOMAIN}api/'
+
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
