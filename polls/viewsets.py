@@ -45,3 +45,11 @@ class PollViewSet(viewsets.ModelViewSet):
     queryset = models.Poll.objects.all()
     serializer_class = serializers.PollSerializer
     permission_classes = (IsOwnerOrReadOnly,)
+
+
+class ChoiceViewSet(viewsets.ModelViewSet):
+    """Viewset for ChoiceSerializer"""
+
+    queryset = models.Choice.objects.all()
+    serializer_class = serializers.ChoiceSerializer
+    permission_classes = (IsChoiceOwnerOrReadOnly,)
