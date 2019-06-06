@@ -11,12 +11,10 @@ class PollBaseListView(ListView):
     context_object_name = 'polls'
 
 
-class PollListView(ListView):
+class PollListView(PollBaseListView):
     """Polls ListView."""
 
     template_name = 'home.html'
-    paginate_by = 50
-    context_object_name = 'polls'
 
     def get_queryset(self):
         """Return querset for the list."""
