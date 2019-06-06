@@ -212,3 +212,7 @@ STATIC_ROOT = os.getenv(
     os.path.join(BASE_DIR, 'public', 'static'))
 
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
+
+MEDIA_ROOT = os.getenv(
+    'MEDIA_ROOT',
+    os.path.join(BASE_DIR, 'public', 'media'))
