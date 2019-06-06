@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load poll_extras %}
+
+{% block title %}My Polls{% endblock title %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block content %}
+<div class="row mt-4">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h2>My Polls</h2>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Total Responses</th>
+              <th scope="col">Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for poll in polls %}
+            <tr>
+              <th scope="row">{{ poll.title|truncatechars:'30' }}</th>
+              <td>{{ poll.owner.username }}</td>
+              <td>{{ poll|total_responses }}</td>
+              <td>{{ poll.datetime_created|date:"d M Y" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% if not page_obj.paginator.num_pages == 1 %}
+        <div class="card-footer">
+          <div class="text-center">
+            <span>
+              {% if page_obj.has_previous %}
+                <a class="btn btn-info btn-sm" href="?page=1">&laquo; first</a>
+                <a class="btn btn-info btn-sm" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+              {% endif %}
+              <a class="btn btn-info btn-sm active">{{ page_obj.number }}</a>
+              {% if page_obj.has_next %}
+                <a class="btn btn-info btn-sm" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                <a class="btn btn-info btn-sm" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
