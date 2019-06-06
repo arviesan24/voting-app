@@ -31,3 +31,9 @@ urlpatterns = [
         include(('polls.urls', 'polls'), namespace='polls')),
     path('', views.PollListView.as_view(), name='home'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns = (
+        urlpatterns + static(
+            settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
