@@ -121,6 +121,11 @@ WSGI_APPLICATION = 'voting.wsgi.application'
 
 USE_HTTPS = json.loads(os.getenv('USE_HTTPS', 'true'))
 
+CURRENT_PROTOCOL = 'http://'
+
+if USE_HTTPS:
+    CURRENT_PROTOCOL = 'https://'
+
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
