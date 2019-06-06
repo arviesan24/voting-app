@@ -9,7 +9,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     """Serializer for `User` model."""
 
     class Meta:
-        model = settings.AUTH_USER_MODEL
+        model = get_user_model()
         fields = (
             'url', 'id', 'username', 'email_address', 'first_name',
             'last_name')
