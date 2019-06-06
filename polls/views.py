@@ -34,3 +34,11 @@ class MyPollListView(LoginRequiredMixin, PollBaseListView):
         qs = models.Poll.objects.filter(
             owner=self.request.user).order_by('-id')
         return qs
+
+
+class PollDetailView(DetailView):
+    """Displays poll details."""
+
+    template_name = 'polls/details.html'
+    model = models.Poll
+    context_object_name = 'poll'
