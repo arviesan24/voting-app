@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'rest_framework',
 
     # allauth's enabled providers
     'allauth.socialaccount.providers.facebook',
