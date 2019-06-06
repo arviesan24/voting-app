@@ -27,7 +27,7 @@ class IsAccountOwnerOrReadOnly(permissions.BasePermission):
 class UserViewSet(viewsets.ModelViewSet):
     """Viewset for UserSerializer."""
 
-    queryset = settings.AUTH_USER_MODEL.objects.all()
+    queryset = get_user_model().objects.all()
     serializer_class = serializers.UserSerializer
     permission_classes = (
         permissions.IsAuthenticated, IsAccountOwnerOrReadOnly,)
