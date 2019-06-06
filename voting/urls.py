@@ -13,16 +13,39 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
-from django.views.generic import TemplateView
 
+from rest_framework import routers
+
+from polls import views
+
+
+router = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('allauth/', include('allauth.urls')),
     path('accounts/',
         include(('accounts.urls', 'accounts'), namespace='accounts')),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('polls/',
+        include(('polls.urls', 'polls'), namespace='polls')),
+    path('', views.PollListView.as_view(), name='home'),
+
+    # DRF URLs
+    path('', include('accounts.urls_api')),
+    path('', include('polls.urls_api')),
+    path('', include('votes.urls_api')),
+    path('api/', include(router.urls)),
+    path('api-auth/',
+        include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns = (
+        urlpatterns + static(
+            settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

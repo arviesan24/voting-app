@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load poll_extras %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}My Polls{% endblock title %}
 
 {% block navbar %}
 {% endblock navbar %}
@@ -11,7 +11,7 @@
   <div class="col-md-8 offset-md-2">
     <div class="card">
       <div class="card-header">
-        <h2>Polls</h2>
+        <h2>My Polls</h2>
       </div>
       <div class="card-body">
         <table class="table table-striped">
@@ -25,12 +25,12 @@
           </thead>
           <tbody>
             {% for poll in polls %}
-              <tr>
-                <th scope="row"><a href="{% url 'polls:details' poll.id %}">{{ poll.title|truncatechars:'30' }}</a></th>
-                <td>{{ poll.owner.username }}</td>
-                <td>{{ poll|total_responses }}</td>
-                <td>{{ poll.datetime_created|date:"d M Y" }}</td>
-              </tr>
+            <tr>
+              <th scope="row">{{ poll.title|truncatechars:'30' }}</th>
+              <td>{{ poll.owner.username }}</td>
+              <td>{{ poll|total_responses }}</td>
+              <td>{{ poll.datetime_created|date:"d M Y" }}</td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
