@@ -64,7 +64,7 @@ ACCOUNT_FORMS = {
 }
 
 #
-#
+# Email Settings
 #
 
 EMAIL_BACKEND = os.getenv(
