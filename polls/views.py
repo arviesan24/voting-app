@@ -23,7 +23,7 @@ class PollListView(PollBaseListView):
         return qs
 
 
-class MyPollListView(PollBaseListView):
+class MyPollListView(LoginRequiredMixin, PollBaseListView):
     """Current User's Polls ListView."""
 
     template_name = 'polls/my-polls.html'
