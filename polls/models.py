@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 
+from votes.models import Vote
+
 
 class Poll(models.Model):
     """Model for Polls."""
