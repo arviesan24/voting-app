@@ -25,5 +25,7 @@ urlpatterns = [
     path('allauth/', include('allauth.urls')),
     path('accounts/',
         include(('accounts.urls', 'accounts'), namespace='accounts')),
+    path('polls/',
+        include(('polls.urls', 'polls'), namespace='polls')),
     path('', views.PollListView.as_view(), name='home'),
 ]
