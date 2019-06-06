@@ -4,6 +4,13 @@ from django.views.generic import ListView
 from . import models
 
 
+class PollBaseListView(ListView):
+    """Base ListView for Polls."""
+
+    paginate_by = 50
+    context_object_name = 'polls'
+
+
 class PollListView(ListView):
     """Polls ListView."""
 
