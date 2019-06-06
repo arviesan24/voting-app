@@ -127,6 +127,13 @@ if USE_HTTPS:
     CURRENT_PROTOCOL = 'https://'
 
 
+#
+# DOMAIN NAME TO USE
+#
+
+CURRENT_DOMAIN = os.getenv('CURRENT_DOMAIN', '127.0.0.1:8000/')
+
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
