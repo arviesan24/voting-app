@@ -1,6 +1,6 @@
 """Viewsets for Accounts app."""
 
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django_filters import rest_framework as django_filters
 from rest_framework import viewsets
