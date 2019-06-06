@@ -115,6 +115,13 @@ AUTHENTICATION_BACKENDS = (
 WSGI_APPLICATION = 'voting.wsgi.application'
 
 
+#
+# PROTOCOL TO USE
+#
+
+USE_HTTPS = json.loads(os.getenv('USE_HTTPS', 'true'))
+
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
