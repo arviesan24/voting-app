@@ -15,3 +15,4 @@ class VoteViewSet(viewsets.ModelViewSet):
     queryset = models.Vote.objects.all()
     serializer_class = serializers.VoteSerializer
     filter_backends = (django_filters.DjangoFilterBackend,)
+    filter_class = VoteFilterSet
