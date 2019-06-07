@@ -102,6 +102,7 @@ TEMPLATES = [
 
                 # custom project context processor
                 'voting.context_processors.debug',
+                'voting.context_processors.global_custom_tags',
             ],
         },
     },
