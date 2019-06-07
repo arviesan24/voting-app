@@ -1,17 +1,25 @@
 
 Vue.component('pie-chart', {
   extends: VueChartJs.Pie,
+  // props: ['choices'],
   mounted () {
-
-    let randomHexColor = ['#'+(Math.random()*0xFFFFFF<<0).toString(16),];
+    const choices = JSON.parse(localStorage.getItem('choices'));
+    let randomHexColor = [];
+    let chartLabels = [];
+    let chartData = [];
+    choices.forEach(choice => {
+      randomHexColor.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+      chartLabels.push(choice.name);
+      chartData.push(choice.total_votes);
+    });
 
     this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: chartLabels,
       datasets: [
         {
-          label: 'Data One',
+          label: 'Poll Result',
           backgroundColor: randomHexColor,
-          data: [40, 39, 10, 40, 39, 80, 40]
+          data: chartData
         }
       ]
     }, {responsive: true, maintainAspectRatio: false})
