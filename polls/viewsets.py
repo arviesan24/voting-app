@@ -54,6 +54,7 @@ class PollViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PollSerializer
     permission_classes = (IsOwnerOrReadOnly,)
     filter_backends = (django_filters.DjangoFilterBackend,)
+    filterset_class = PollFilterSet
 
 
 class ChoiceViewSet(viewsets.ModelViewSet):
