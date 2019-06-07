@@ -26,7 +26,7 @@
           <tbody>
             {% for poll in polls %}
             <tr>
-              <th scope="row">{{ poll.title|truncatechars:'30' }}</th>
+              <th scope="row"><a href="{% url 'polls:details' poll.id %}">{{ poll.title|truncatechars:'30' }}</a></th>
               <td>{{ poll.owner.username }}</td>
               <td>{{ poll|total_responses }}</td>
               <td>{{ poll.datetime_created|date:"d M Y" }}</td>
