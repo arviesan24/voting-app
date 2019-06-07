@@ -47,6 +47,14 @@ class PollFilterSet(django_filters.FilterSet):
         fields = ['id', 'owner', 'title', 'description']
 
 
+class ChoiceFilterSet(django_filters.FilterSet):
+    """FilterSet for ChoiceViewSet."""
+
+    class Meta:
+        model = models.Choice
+        fields = ['id', 'poll', 'name']
+
+
 class PollViewSet(viewsets.ModelViewSet):
     """Viewset for PollSerializer."""
 
