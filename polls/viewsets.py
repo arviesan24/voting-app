@@ -72,3 +72,4 @@ class ChoiceViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ChoiceSerializer
     permission_classes = (IsChoiceOwnerOrReadOnly,)
     filter_backends = (django_filters.DjangoFilterBackend,)
+    filterset_class = ChoiceFilterSet
