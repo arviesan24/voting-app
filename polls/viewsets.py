@@ -39,12 +39,30 @@ class IsChoiceOwnerOrReadOnly(permissions.BasePermission):
         return obj.poll.owner == request.user
 
 
+class PollFilterSet(django_filters.FilterSet):
+    """FilterSet for PollViewSet."""
+
+    class Meta:
+        model = models.Poll
+        fields = ['id', 'owner', 'title', 'description']
+
+
+class ChoiceFilterSet(django_filters.FilterSet):
+    """FilterSet for ChoiceViewSet."""
+
+    class Meta:
+        model = models.Choice
+        fields = ['id', 'poll', 'name']
+
+
 class PollViewSet(viewsets.ModelViewSet):
     """Viewset for PollSerializer."""
 
     queryset = models.Poll.objects.all()
     serializer_class = serializers.PollSerializer
     permission_classes = (IsOwnerOrReadOnly,)
+    filter_backends = (django_filters.DjangoFilterBackend,)
+    filterset_class = PollFilterSet
 
 
 class ChoiceViewSet(viewsets.ModelViewSet):
@@ -53,3 +71,5 @@ class ChoiceViewSet(viewsets.ModelViewSet):
     queryset = models.Choice.objects.all()
     serializer_class = serializers.ChoiceSerializer
     permission_classes = (IsChoiceOwnerOrReadOnly,)
+    filter_backends = (django_filters.DjangoFilterBackend,)
+    filterset_class = ChoiceFilterSet
