@@ -9,6 +9,26 @@ from . import serializers
 from . import models
 
 
+class VoteFilterSet(django_filters.FilterSet):
+    """Filterset for VoteViewSet."""
+
+    def get_content_type():
+        """Return list for `content_type` choices."""
+        item_list = []
+        content_list = ContentType.objects.all()
+        for item in content_list:
+            item_list.append((item.name, item.name))
+        return item_list
+
+    content_type = django_filters.ChoiceFilter(
+        choices=get_content_type(), field_name='content_type__model',
+        lookup_expr='iexact')
+
+    class Meta:
+        model = models.Vote
+        fields = ['id', 'owner', 'content_type', 'object_id']
+
+
 class VoteViewSet(viewsets.ModelViewSet):
     """Viewset for VoteSerializer."""
 
