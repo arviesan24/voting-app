@@ -101,7 +101,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # custom project context processor
-                'voting.context_processors.debug',
                 'voting.context_processors.global_custom_tags',
             ],
         },
