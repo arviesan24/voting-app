@@ -39,6 +39,14 @@ class IsChoiceOwnerOrReadOnly(permissions.BasePermission):
         return obj.poll.owner == request.user
 
 
+class PollFilterSet(django_filters.FilterSet):
+    """FilterSet for PollViewSet."""
+
+    class Meta:
+        model = models.Poll
+        fields = ['id', 'owner', 'title', 'description']
+
+
 class PollViewSet(viewsets.ModelViewSet):
     """Viewset for PollSerializer."""
 
