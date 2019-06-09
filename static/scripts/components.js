@@ -1,9 +1,11 @@
 
 Vue.component('pie-chart', {
   extends: VueChartJs.Pie,
-  // props: ['choices'],
+  props: {
+    propChoices: Array
+  },
   mounted () {
-    const choices = JSON.parse(localStorage.getItem('choices'));
+    const choices = this.propChoices;
     let randomHexColor = [];
     let chartLabels = [];
     let chartData = [];
