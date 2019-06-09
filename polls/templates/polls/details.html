@@ -5,7 +5,7 @@
 {{ poll.title }}
 
 <div class="app">
-  <pie-chart></pie-chart>
+  <pie-chart v-if="choices" v-bind:prop-choices="choices"></pie-chart>
 </div>
 {% endblock content %}
 
