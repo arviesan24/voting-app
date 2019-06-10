@@ -36,12 +36,10 @@ Vue.component('choices-dropdown', {
     }
   },
   template: `
-  <template>
-    <div>
-      <select>
-        <option v-for="option in options" v-bind:value="option.value">{{ option.name }}</option>
-      </select>
-    </div>
-  </template>
+  <div>
+    <select>
+      <option v-for="option in options" v-bind:value="option.value">{{ option.name }}</option>
+    </select>
+  </div>
   `
 })
