@@ -12,7 +12,12 @@
 <div class="app">
   <div class="row mt-4">
     <div class="col-md-8 offset-md-2 card row">
-      <div class="col-sm-6 pt-5">{{ poll.title }}</div>
+      <div class="col-sm-6 pt-5">
+        <div class="filter">
+          <label for="component-dropdown">{{ poll.title }}</label>
+          <choices-dropdown id="component-dropdown" v-bind:options="dropdownOptions"></choices-dropdown>
+        </div>
+      </div>
       <div class="col-sm-6 pt-3"><pie-chart v-if="choices" v-bind:prop-choices="choices"></pie-chart></div>
     </div>
   </div>
