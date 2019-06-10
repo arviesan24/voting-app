@@ -28,3 +28,20 @@ Vue.component('pie-chart', {
   }
   
 })
+Vue.component('choices-dropdown', {
+  props: {
+    options: {
+      type: Object,
+      required: true
+    }
+  },
+  template: `
+  <template>
+    <div>
+      <select>
+        <option v-for="option in options" v-bind:value="option.value">{{ option.name }}</option>
+      </select>
+    </div>
+  </template>
+  `
+})
