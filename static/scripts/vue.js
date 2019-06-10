@@ -4,7 +4,8 @@ var vm = new Vue({
     el: '.app',
     data: {
       choices: null,
-      dropdownOptions: []
+      dropdownOptions: [],
+      selectedChoice: Number
     },
     mounted() {
       axios.get(`${API_ROOT_URL}choices/?poll=${pollId}`)
@@ -19,5 +20,11 @@ var vm = new Vue({
           });
         });
       })
+    },
+    methods: {
+      saveVote(choice) {
+        // get the selected value that will be passed to the post request.
+        this.selectedChoice = choice;
+      }
     }
   })
