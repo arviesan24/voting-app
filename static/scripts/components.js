@@ -30,6 +30,7 @@ Vue.component('pie-chart', {
 })
 Vue.component('choices-dropdown', {
   props: {
+    value: null,
     options: {
       type: Array,
       required: true
