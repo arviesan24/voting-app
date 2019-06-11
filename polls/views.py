@@ -56,6 +56,7 @@ class PollUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'polls/update.html'
     model = models.Poll
     fields = ['title', 'description']
+    context_object_name = 'poll'
 
     def get_success_url(self):
         """Return success URL."""
