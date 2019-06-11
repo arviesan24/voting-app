@@ -46,7 +46,7 @@ class PollDetailView(DetailView):
     context_object_name = 'poll'
 
 
-class PollUpdateView(UpdateView):
+class PollUpdateView(LoginRequiredMixin, UpdateView):
     """View to update Poll."""
 
     template_name = 'polls/update.html'
