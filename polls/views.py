@@ -44,3 +44,11 @@ class PollDetailView(DetailView):
     template_name = 'polls/details.html'
     model = models.Poll
     context_object_name = 'poll'
+
+
+class PollUpdateView(UpdateView):
+    """View to update Poll."""
+
+    template_name = 'polls/update.html'
+    model = models.Poll
+    context_object_name = 'poll'
