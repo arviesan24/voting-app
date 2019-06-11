@@ -61,3 +61,9 @@ class PollUpdateView(LoginRequiredMixin, UpdateView):
         """Return success URL."""
         return reverse_lazy(
             'polls:update', kwargs = {'pk' : self.object.id, })
+
+    def form_valid(self, form):
+        """Actions done on form success."""
+        messages.success(self.request, 'Poll details updated.')
+
+        return super().form_valid(form)
