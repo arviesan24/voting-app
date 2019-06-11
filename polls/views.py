@@ -53,3 +53,8 @@ class PollUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'polls/update.html'
     model = models.Poll
     fields = ['title', 'description']
+
+    def get_success_url(self):
+        """Return success URL."""
+        return reverse_lazy(
+            'polls:update', kwargs = {'pk' : self.object.id, })
