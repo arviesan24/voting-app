@@ -11,15 +11,23 @@
 {% block content %}
 <div class="app">
   <div class="row mt-4">
-    <div class="col-md-8 offset-md-2 card row">
-      <div class="col-sm-6 pt-5">
-        <div class="filter">
-          <label for="component-dropdown">{{ poll.title }}</label>
-          <choices-dropdown id="component-dropdown" v-on:emit-selected="getVote($event)" v-bind:options="dropdownOptions"></choices-dropdown>
-        </div>
-        <button v-on:click="saveVote" class="btn btn-sm btn-primary mt-3">Submit Vote</button>
+    <div class="col-md-8 offset-md-2 card">
+      <div class="card-header">
+        <h1 class="d-inline">Poll Details</h1>
+        {% if poll.owner == user %}
+          <a href="{% url 'polls:update' poll.id %}" class="d-inline btn btn-outline-primary btn-lg float-right">Edit</a>
+        {% endif %}
       </div>
-      <div class="col-sm-6 pt-3"><pie-chart v-if="choices" v-bind:prop-choices="choices"></pie-chart></div>
+      <div class="card-body row">
+        <div class="col-sm-6 pt-5">
+          <div class="filter">
+            <label for="component-dropdown">{{ poll.title }}</label>
+            <choices-dropdown id="component-dropdown" v-on:emit-selected="getVote($event)" v-bind:options="dropdownOptions"></choices-dropdown>
+          </div>
+          <button v-on:click="saveVote" class="btn btn-sm btn-primary mt-3">Submit Vote</button>
+        </div>
+        <div class="col-sm-6 pt-3"><pie-chart v-if="choices" v-bind:prop-choices="choices"></pie-chart></div>
+      </div>
     </div>
   </div>
 </div>
