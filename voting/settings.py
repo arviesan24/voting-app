@@ -100,6 +100,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # custom project context processor
+                'voting.context_processors.global_custom_tags',
             ],
         },
     },
@@ -219,3 +222,7 @@ MEDIA_ROOT = os.getenv(
     os.path.join(BASE_DIR, 'public', 'media'))
 
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]

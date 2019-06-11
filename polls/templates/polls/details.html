@@ -1,4 +1,50 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock css %}
+
+{% block title %}
+  Details
+{% endblock title %}
+
 {% block content %}
-{{ poll.title }}
+<div class="app">
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-2 card row">
+      <div class="col-sm-6 pt-5">
+        <div class="filter">
+          <label for="component-dropdown">{{ poll.title }}</label>
+          <choices-dropdown id="component-dropdown" v-on:emit-selected="getVote($event)" v-bind:options="dropdownOptions"></choices-dropdown>
+        </div>
+        <button v-on:click="saveVote" class="btn btn-sm btn-primary mt-3">Submit Vote</button>
+      </div>
+      <div class="col-sm-6 pt-3"><pie-chart v-if="choices" v-bind:prop-choices="choices"></pie-chart></div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
+
+{% block js %}
+  {% if DEBUG %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+      let vueDebug = true;
+    </script>
+  {% else %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+        <script>
+      let vueDebug = false;
+    </script>
+  {% endif %}
+  <script>
+    let API_ROOT_URL = '{{ API_ROOT_URL }}';
+    let pollId = '{{ poll.id }}';
+    let csrfToken = '{{ csrf_token }}';
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+  <script src="{% static 'scripts/components.js' %}"></script>
+  <script src="{% static 'scripts/vue.js' %}"></script>
+{% endblock js %}
