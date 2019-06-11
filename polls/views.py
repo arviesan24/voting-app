@@ -68,3 +68,9 @@ class PollUpdateView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, 'Poll details updated.')
 
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['choices'] = (
+            self.get_queryset().prefetch_related('choices').all())
+        return context
