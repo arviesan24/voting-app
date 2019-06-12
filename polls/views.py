@@ -72,5 +72,5 @@ class PollUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['choices'] = (
-            self.get_queryset().prefetch_related('choices').all())
+            models.Choice.objects.filter(poll=self.get_object()))
         return context
