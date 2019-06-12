@@ -74,11 +74,3 @@ class PollUpdateView(LoginRequiredMixin, UpdateView):
         context['choices'] = (
             models.Choice.objects.filter(poll=self.get_object()))
         return context
-
-
-class ChoiceUpdateView(LoginRequiredMixin, UpdateView):
-    """UpdateView for Choice model."""
-
-    template_name = 'polls/update.html'
-    model = models.Choice
-    fields = ['title', 'description']
