@@ -1,0 +1,70 @@
+{% extends 'polls/vue_base.html' %}
+{% load static %}
+
+{% block css %}
+ul {
+  list-style: none;
+  padding: 0px 0px;
+}
+input[type=text] {
+  width: 100%;
+}
+textarea {
+  width: 100%;
+}
+{% endblock css %}
+
+{% block title %}
+  Edit
+{% endblock title %}
+
+{% block content %}
+<div class="app">
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-2 card">
+      <div class="card-header">
+        <h1 class="d-inline">Edit Poll</h1>
+      </div>
+      <div class="card-body row">
+        <div class="col-sm-6 pt-5">
+          {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+          {% endif %}
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <small>{{ form.non_field_errors }}</small>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save" />
+          </form>
+        </div>
+        <div class="col-sm-6 pt-5">
+          <h2>Choices</h2>
+          <div class="app">
+            <choices-list v-bind:choices="choices"></choices-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'scripts/components/choices-list.js' %}"></script>
+<script src="{% static 'scripts/vues/update.js' %}"></script>
+{% endblock extra_js %}
