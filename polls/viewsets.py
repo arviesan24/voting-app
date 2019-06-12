@@ -9,6 +9,8 @@ from rest_framework import permissions
 from . import serializers
 from . import models
 
+from votes.models import Vote
+
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """
