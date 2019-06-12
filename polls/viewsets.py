@@ -1,5 +1,6 @@
 """Viewsets for Polls app."""
 
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django_filters import rest_framework as django_filters
 from rest_framework import viewsets
