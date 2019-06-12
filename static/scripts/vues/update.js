@@ -13,7 +13,6 @@ var vm = new Vue({
       axios.get(`${API_ROOT_URL}choices/?poll=${pollId}`)
       .then(response => {
         this.choices = response.data;
-        console.log(this.choices);
       });
     }
   },
