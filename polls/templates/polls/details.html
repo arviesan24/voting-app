@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'polls/vue_base.html' %}
 {% load static %}
 
 {% block css %}
@@ -33,26 +33,9 @@
 </div>
 {% endblock content %}
 
-{% block js %}
-  {% if DEBUG %}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    <script>
-      let vueDebug = true;
-    </script>
-  {% else %}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script>
-      let vueDebug = false;
-    </script>
-  {% endif %}
-  <script>
-    let API_ROOT_URL = '{{ API_ROOT_URL }}';
-    let pollId = '{{ poll.id }}';
-    let csrfToken = '{{ csrf_token }}';
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-  <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-  <script src="{% static 'scripts/components.js' %}"></script>
-  <script src="{% static 'scripts/vue.js' %}"></script>
-{% endblock js %}
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+<script src="{% static 'scripts/components/choices-dropdown.js' %}"></script>
+<script src="{% static 'scripts/components/pie-chart.js' %}"></script>
+{% endblock extra_js %}
