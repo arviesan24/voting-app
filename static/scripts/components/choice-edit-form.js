@@ -10,6 +10,23 @@ Vue.component('modal', {
   mounted() {
     this.choice = this.choiceToUse;
   },
+  methods: {
+    editChoice() {
+      axios({
+        method: 'patch',
+        url: `${API_ROOT_URL}choices/${this.choice.id}/`,
+        headers: {
+          'Authorization': auth_user_token
+        },
+        data: {
+          name: this.choice.name
+        }
+      })
+      .then(response => {
+        console.log(response);
+      });
+    } 
+  },
   template: `
   <transition name="modal">
     <div class="modal-mask">
@@ -29,11 +46,9 @@ Vue.component('modal', {
 
           <div class="modal-footer">
             <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
+              <button class="btn btn-outline-primary btn-small" @click="$emit('close');">Cancel</button>
+              <button class="modal-default-button btn btn-primary btn-small" @click="editChoice(); $emit('close');">Save</button>
+              </slot>
           </div>
         </div>
       </div>
