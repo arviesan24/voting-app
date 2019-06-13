@@ -55,7 +55,10 @@ textarea {
         <div class="col-sm-6 pt-5">
           <h2>Choices</h2>
           <div class="app">
-            <choices-list v-bind:choices="choices"></choices-list>
+            <modal v-if="showModal" v-on:close="showModal=false">
+              <h3 slot="header">custom header</h3>
+            </modal>
+            <choices-list v-on:emit-selected-choice="selectedChoiceValue($event)" v-bind:choices="choices"></choices-list>
           </div>
         </div>
       </div>
@@ -65,6 +68,7 @@ textarea {
 {% endblock content %}
 
 {% block extra_js %}
+<script src="{% static 'scripts/components/choice-edit-form.js' %}"></script>
 <script src="{% static 'scripts/components/choices-list.js' %}"></script>
 <script src="{% static 'scripts/vues/update.js' %}"></script>
 {% endblock extra_js %}
