@@ -21,7 +21,10 @@
       <div class="card-body row">
         <div class="col-sm-6 pt-5">
           <div class="filter">
-            <label for="component-dropdown">{{ poll.title }}</label>
+            <p>
+              <span class="d-block">{{ poll.title }}</span>
+              <small class="text-secondary">{{ poll.description }}</small>
+            </p>
             <choices-dropdown id="component-dropdown" v-on:emit-selected="getVote($event)" v-bind:options="dropdownOptions"></choices-dropdown>
           </div>
           <button v-on:click="saveVote" class="btn btn-sm btn-primary mt-3">Submit Vote</button>
