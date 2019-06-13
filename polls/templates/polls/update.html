@@ -89,7 +89,7 @@ textarea {
   <div class="row mt-4">
     <div class="col-md-8 offset-md-2 card">
       <div class="card-header">
-        <h1 class="d-inline">Edit Poll</h1>
+        <h1 class="d-inline">Edit Poll</h1><a class="btn btn-outline-primary btn-lg float-right" href="{% url 'polls:details' poll.id %}">View Poll</a>
       </div>
       <div class="card-body row">
         <div class="col-sm-6 pt-5">
@@ -121,8 +121,8 @@ textarea {
         <div class="col-sm-6 pt-5">
           <h2>Choices</h2>
           <div class="app">
-            <modal v-if="showModal" v-on:close="showModal=false">
-              <h3 slot="header">custom header</h3>
+            <modal v-if="showModal" v-bind:choice-to-use="selectedChoice" v-on:close="showModal=false">
+              <h3 slot="header">Edit Choice</h3>
             </modal>
             <choices-list v-on:emit-selected-choice="selectedChoiceValue($event)" v-bind:choices="choices"></choices-list>
           </div>
