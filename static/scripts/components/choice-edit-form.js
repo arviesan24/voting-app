@@ -1,4 +1,4 @@
-Vue.component('modal', {
+Vue.component('choice-edit-form', {
   props: {
     choiceToUse: Object
   },

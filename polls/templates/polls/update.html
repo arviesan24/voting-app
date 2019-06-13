@@ -121,9 +121,9 @@ textarea {
         <div class="col-sm-6 pt-5">
           <h2>Choices</h2>
           <div class="app">
-            <modal v-if="showModal" v-bind:choice-to-use="selectedChoice" v-on:close="showModal=false">
+            <choice-edit-form v-if="showModal" v-bind:choice-to-use="selectedChoice" v-on:close="showModal=false">
               <h3 slot="header">Edit Choice</h3>
-            </modal>
+            </choice-edit-form>
             <choices-list v-on:emit-selected-choice="selectedChoiceValue($event)" v-bind:choices="choices"></choices-list>
           </div>
         </div>
