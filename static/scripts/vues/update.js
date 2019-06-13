@@ -3,7 +3,8 @@ Vue.config.debug = vueDebug;
 var vm = new Vue({
   el: '.app',
   data: {
-    choices: []
+    choices: [],
+    showModal: false
   },
   mounted() {
     this.loadChoices();
@@ -14,6 +15,10 @@ var vm = new Vue({
       .then(response => {
         this.choices = response.data;
       });
+    },
+    selectedChoiceValue(e) {
+      this.showModal = true;
+      console.log(e);
     }
   },
 });
