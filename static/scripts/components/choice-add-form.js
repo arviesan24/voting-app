@@ -3,7 +3,7 @@ Vue.component('choice-add-form', {
   <div class="input-group mb-3">
     <input type="text" v-model="newChoice" class="form-control" placeholder="Add Choice">
     <div class="input-group-append">
-      <button class="btn btn-primary" v-on:click="saveChoice()">Save</button>  
+      <button v-bind:disabled="newChoice==null||newChoice==''||!newChoice.trim()" class="btn btn-primary" v-on:click="saveChoice()">Save</button>  
      </div>
   </div>
   `,
