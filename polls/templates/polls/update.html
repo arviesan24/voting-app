@@ -124,6 +124,7 @@ textarea {
             <choice-edit-form v-if="showModal" v-bind:choice-to-use="selectedChoice" v-on:close="showModal=false">
               <h3 slot="header">Edit Choice</h3>
             </choice-edit-form>
+            <choice-add-form></choice-add-form>
             <choices-list v-on:emit-selected-choice="selectedChoiceValue($event)" v-bind:choices="choices"></choices-list>
           </div>
         </div>
