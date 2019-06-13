@@ -1,4 +1,15 @@
 Vue.component('modal', {
+  props: {
+    choiceToUse: Object
+  },
+  data() {
+    return {
+      choice: {}
+    }
+  },
+  mounted() {
+    this.choice = this.choiceToUse;
+  },
   template: `
   <transition name="modal">
     <div class="modal-mask">
@@ -7,13 +18,12 @@ Vue.component('modal', {
 
           <div class="modal-header">
             <slot name="header">
-              default header
             </slot>
           </div>
 
           <div class="modal-body">
             <slot name="body">
-              default body
+              <input v-model="choice.name" type="text" />
             </slot>
           </div>
 
