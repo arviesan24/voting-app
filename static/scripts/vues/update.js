@@ -4,7 +4,8 @@ var vm = new Vue({
   el: '.app',
   data: {
     choices: [],
-    showModal: false
+    showModal: false,
+    selectedChoice: {}
   },
   mounted() {
     this.loadChoices();
@@ -18,7 +19,7 @@ var vm = new Vue({
     },
     selectedChoiceValue(e) {
       this.showModal = true;
-      console.log(e);
+      this.selectedChoice = e;
     }
   },
 });
