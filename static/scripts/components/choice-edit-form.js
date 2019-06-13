@@ -25,7 +25,10 @@ Vue.component('modal', {
       .then(response => {
         console.log(response);
       });
-    } 
+    },
+    loadChoices() {
+      this.$parent.loadChoices();
+    }  
   },
   template: `
   <transition name="modal">
@@ -46,7 +49,7 @@ Vue.component('modal', {
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="btn btn-outline-primary btn-small" @click="$emit('close');">Cancel</button>
+              <button class="btn btn-outline-primary btn-small" @click="loadChoices(); $emit('close');">Cancel</button>
               <button class="modal-default-button btn btn-primary btn-small" @click="editChoice(); $emit('close');">Save</button>
               </slot>
           </div>
