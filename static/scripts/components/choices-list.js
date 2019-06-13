@@ -8,7 +8,7 @@ Vue.component('choices-list', {
       <tbody>
         <tr v-for="choice in choices">
           <th scope="row">{{choice.name}}</th>
-          <td><button class="btn btn-success btn-sm mr-2"><i class="fa fa-edit"></i></button><button v-on:click="deleteChoice(choice.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></td>
+          <td><button v-on:click="choiceDataToModal(choice)" class="btn btn-success btn-sm mr-2"><i class="fa fa-edit"></i></button><button v-on:click="deleteChoice(choice.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></td>
         </tr>
       </tbody>
     </table>
@@ -20,6 +20,9 @@ Vue.component('choices-list', {
       .then(() => {
         this.$parent.loadChoices();
       });
+    },
+    choiceDataToModal(choice) {
+      this.$emit('emit-selected-choice',  choice);
     }
   },
 });
