@@ -13,9 +13,12 @@ Vue.component('poll-add-form', {
 
           <div class="modal-body">
             <slot name="body">
-              <input type="text" v-model="pollTitle" class="form-control my-2" placeholder="Add Title">
-              <textarea v-model="pollDescription" class="form-control my-2" placeholder="Add Description" rows="3"></textarea>
-              <textarea v-model="pollChoices" class="form-control my-2" placeholder="Add Choices (seperated by line)" rows="5"></textarea>
+              <input type="text" v-on:input="pollTitleValidation" v-model="pollTitle" class="form-control my-2" placeholder="Add Title">
+              <small class="text-danger">[[pollTitleError]]</small>
+              <textarea v-on:input="pollDescriptionValidation" v-model="pollDescription" class="form-control my-2" placeholder="Add Description" rows="3"></textarea>
+              <small class="text-danger">[[pollDescriptionError]]</small>
+              <textarea v-on:input="pollChoicesValidation" v-model="pollChoices" class="form-control my-2" placeholder="Add Choices (seperated by line)" rows="5"></textarea>
+              <small class="text-danger">[[pollChoicesError]]</small>
             </slot>
           </div>
 
