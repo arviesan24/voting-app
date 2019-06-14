@@ -53,7 +53,9 @@ Vue.component('poll-add-form', {
   },
   computed: {
     choicesArray: function() {
-      return this.pollChoices.split('\n');
+      let choices = this.pollChoices.split('\n');
+      // filter out empty array item
+      return choices.filter(choice => (choice.trim()).length > 0);
     },
     inputsValid() {
       if (this.pollTitle==null||this.pollTitle==''||!this.pollTitle.trim()) {
