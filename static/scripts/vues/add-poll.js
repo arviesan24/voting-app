@@ -40,7 +40,8 @@ var vm = new Vue({
             }
           });
         });
-      }).catch((error) => {
+      }).then(() => location.reload(true))
+      .catch((error) => {
         console.log(error);
       });
     }
