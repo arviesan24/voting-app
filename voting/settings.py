@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = json.loads(os.getenv('DEBUG', 'false'))
 
-ALLOWED_HOSTS = json.loads(os.getenv('ALLOWED_HOSTS', ''))
+ALLOWED_HOSTS = json.loads(os.getenv('ALLOWED_HOSTS', '["127.0.0.1:5000"]'))
 
 
 # Application definition
