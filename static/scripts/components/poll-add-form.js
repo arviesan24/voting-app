@@ -63,4 +63,15 @@ Vue.component('poll-add-form', {
       }
     }
   },
+  methods: {
+    pollTitleValidation() {
+      if (this.pollTitle==null||this.pollTitle==''||!this.pollTitle.trim()) {
+        this.pollTitleError = 'Title is required.';
+        return false;
+      } else {
+        this.pollTitleError = null
+        return true
+      }
+    }
+  }
 })
