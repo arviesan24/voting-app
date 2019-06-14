@@ -4,7 +4,7 @@ Vue.component('choices-list', {
   },
   template: `
   <div>
-    <table class="table table-striped">
+  <table class="table table-striped table-responsive-sm">
       <tbody>
         <tr v-for="choice in choices">
           <th scope="row">{{choice.name}}</th>
