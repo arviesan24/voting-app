@@ -1,3 +1,4 @@
+Vue.options.delimiters = ['[[', ']]'];
 Vue.component('poll-add-form', {
   template: `
   <transition name="modal">
