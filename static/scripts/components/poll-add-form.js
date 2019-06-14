@@ -41,7 +41,10 @@ Vue.component('poll-add-form', {
     return {
       pollTitle: '',
       pollDescription: '',
-      pollChoices: ''
+      pollChoices: '',
+      pollTitleError: 'Title is required.',
+      pollDescriptionError: 'Description is required.',
+      pollChoicesError: 'Choices are required.'
     }
   },
   computed: {
