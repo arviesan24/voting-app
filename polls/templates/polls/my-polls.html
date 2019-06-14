@@ -83,7 +83,7 @@
           <button class="btn btn-lg btn-outline-primary float-right" v-on:click="showModal = true">
             <i class="fa fa-plus" aria-hidden="true"></i>
           </button>
-          <poll-add-form v-if="showModal" v-on:save-poll="saveNewPoll($event)" @close="showModal = false">
+          <poll-add-form v-if="showModal" v-on:save-poll="getNewPoll($event)" @close="showModal = false">
             <h3 slot="header">Add Poll</h3>
           </poll-add-form>
         </div>
