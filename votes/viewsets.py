@@ -15,9 +15,14 @@ class VoteFilterSet(django_filters.FilterSet):
     def get_content_type():
         """Return list for `content_type` choices."""
         item_list = []
-        content_list = ContentType.objects.all()
-        for item in content_list:
-            item_list.append((item.name, item.name))
+        # Ignore populating of dropdown list if migrations
+        # look for ContentType even before it creates it.
+        try:
+            content_list = ContentType.objects.all()
+            for item in content_list:
+                item_list.append((item.name, item.name))
+        except:
+            pass
         return item_list
 
     content_type = django_filters.ChoiceFilter(
@@ -35,4 +40,4 @@ class VoteViewSet(viewsets.ModelViewSet):
     queryset = models.Vote.objects.all()
     serializer_class = serializers.VoteSerializer
     filter_backends = (django_filters.DjangoFilterBackend,)
-    filter_class = VoteFilterSet
+    filterset_class = VoteFilterSet
