@@ -72,6 +72,15 @@ Vue.component('poll-add-form', {
         this.pollTitleError = null
         return true
       }
+    },
+    pollDescriptionValidation() {
+      if (this.pollDescription==null||this.pollDescription==''||!this.pollDescription.trim()) {
+        this.pollDescriptionError = 'Description is required.';
+        return false;
+      } else {
+        this.pollDescriptionError = null
+        return true;
+      }
     }
   }
 })
