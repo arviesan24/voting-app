@@ -50,6 +50,17 @@ Vue.component('poll-add-form', {
   computed: {
     choicesArray: function() {
       return this.pollChoices.split('\n');
+    },
+    inputsValid() {
+      if (this.pollTitle==null||this.pollTitle==''||!this.pollTitle.trim()) {
+        return false;
+      } else if (this.pollDescription==null||this.pollDescription==''||!this.pollDescription.trim()) {
+        return false;
+      } else if (this.pollChoices==null||this.pollChoices==''||!this.pollChoices.trim()) {
+        return false;
+      } else {
+        return true;
+      }
     }
-  }
+  },
 })
