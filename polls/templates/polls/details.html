@@ -77,14 +77,18 @@
 <div class="app">
   <div class="row mt-4">
     <div class="col-md-8 offset-md-2 card">
-      <div class="card-header">
-        <h1 class="d-inline">Poll Details</h1>
+      <div class="card-header row">
+        <div class="col-md-8 col-12"><h1 class="d-inline">Poll Details</h1></div>
         {% if poll.owner == user %}
           <poll-delete-modal v-if="showModal" @close="showModal = false">
             <h3 slot="header">Delete Poll</h3>
           </poll-delete-modal>
-          <button @click="showModal = true" class="d-inline btn btn-outline-danger btn-lg float-right ml-2">Delete</button>
-          <a href="{% url 'polls:update' poll.id %}" class="d-inline btn btn-outline-primary btn-lg float-right">Edit</a>
+          <div class="col-lg-2 col-sm-6 col-12 my-1">
+            <button @click="showModal = true" class="btn-block btn btn-outline-danger btn-lg float-right ml-2">Delete</button>
+          </div>
+          <div class="col-lg-2 col-sm-6 col-12 my-1">
+            <a href="{% url 'polls:update' poll.id %}" class="btn-block btn btn-outline-primary btn-lg float-right">Edit</a>
+          </div>
         {% endif %}
       </div>
       <div class="card-body row">
