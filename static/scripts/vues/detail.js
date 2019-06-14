@@ -5,7 +5,8 @@ var vm = new Vue({
     data: {
       choices: null,
       dropdownOptions: [],
-      selectedChoice: Number
+      selectedChoice: Number,
+      showModal: false
     },
     mounted() {
       this.loadChart();
