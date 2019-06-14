@@ -27,7 +27,7 @@ Vue.component('poll-add-form', {
               <button class="btn btn-outline-info" @click="$emit('close')">
                 Cancel
               </button>
-              <button class="btn btn-info" @click="$emit('close')">
+              <button v-bind:disabled="!inputsValid" class="btn btn-info" @click="$emit('close')">
                 Save
               </button>
             </slot>
