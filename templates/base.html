@@ -26,6 +26,9 @@
         {% block navbar %}{% endblock navbar %}
         {% if user.is_authenticated %}
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'polls:my-polls' %}">My Polls</a>
           </li>
           <li class="nav-item">
