@@ -22,6 +22,26 @@ var vm = new Vue({
           title: this.newPoll.title,
           description: this.newPoll.description
         }
+      })
+      .then(response => {
+        let newPollUrl = response.data.url;
+        let choices = this.newPoll.choices;
+
+        return choices.forEach(choice => {
+          axios({
+            method: "post",
+            url: `${API_ROOT_URL}choices/`,
+            headers: {
+              'Authorization': auth_user_token
+            },
+            data: {
+              poll: newPollUrl,
+              name: choice
+            }
+          });
+        });
+      }).catch((error) => {
+        console.log(error);
       });
     }
   },
