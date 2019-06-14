@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
 
     # allauth's enabled providers
     'allauth.socialaccount.providers.facebook',

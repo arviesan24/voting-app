@@ -1,5 +1,6 @@
 """Viewsets for Polls app."""
 
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django_filters import rest_framework as django_filters
 from rest_framework import viewsets
@@ -7,6 +8,8 @@ from rest_framework import permissions
 
 from . import serializers
 from . import models
+
+from votes.models import Vote
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -73,3 +76,14 @@ class ChoiceViewSet(viewsets.ModelViewSet):
     permission_classes = (IsChoiceOwnerOrReadOnly,)
     filter_backends = (django_filters.DjangoFilterBackend,)
     filterset_class = ChoiceFilterSet
+
+    def destroy(self, request, pk=None):
+        """Execute when delete request has been made."""
+        # select Votes related to Choice
+        content_type = ContentType.objects.get_for_model(models.Choice)
+        choice_votes = Vote.objects.filter(
+            content_type=content_type, object_id=pk)
+        # delete selected Votes
+        choice_votes.delete()
+
+        return super().destroy(request, pk)

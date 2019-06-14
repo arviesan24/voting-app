@@ -1,7 +1,13 @@
+"""Views for polls app."""
+
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic import ListView
+from django.views.generic import UpdateView
+
 
 from . import models
 
@@ -42,3 +48,29 @@ class PollDetailView(DetailView):
     template_name = 'polls/details.html'
     model = models.Poll
     context_object_name = 'poll'
+
+
+class PollUpdateView(LoginRequiredMixin, UpdateView):
+    """View to update Poll."""
+
+    template_name = 'polls/update.html'
+    model = models.Poll
+    fields = ['title', 'description']
+    context_object_name = 'poll'
+
+    def get_success_url(self):
+        """Return success URL."""
+        return reverse_lazy(
+            'polls:update', kwargs = {'pk' : self.object.id, })
+
+    def form_valid(self, form):
+        """Actions done on form success."""
+        messages.success(self.request, 'Poll details updated.')
+
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['choices'] = (
+            models.Choice.objects.filter(poll=self.get_object()))
+        return context

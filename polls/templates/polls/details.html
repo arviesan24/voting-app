@@ -1,7 +1,72 @@
-{% extends 'base.html' %}
+{% extends 'polls/vue_base.html' %}
 {% load static %}
 
 {% block css %}
+/* modal CSS */
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  max-width: 500px;
+  overflow-y: auto;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body {
+  margin: 10px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
 {% endblock css %}
 
 {% block title %}
@@ -11,40 +76,47 @@
 {% block content %}
 <div class="app">
   <div class="row mt-4">
-    <div class="col-md-8 offset-md-2 card row">
-      <div class="col-sm-6 pt-5">
-        <div class="filter">
-          <label for="component-dropdown">{{ poll.title }}</label>
-          <choices-dropdown id="component-dropdown" v-on:emit-selected="getVote($event)" v-bind:options="dropdownOptions"></choices-dropdown>
-        </div>
-        <button v-on:click="saveVote" class="btn btn-sm btn-primary mt-3">Submit Vote</button>
+    <div class="col-md-8 offset-md-2 card">
+      <div class="card-header row">
+        <div class="col-md-8 col-12"><h1 class="d-inline">Poll Details</h1></div>
+        {% if poll.owner == user %}
+          <poll-delete-modal v-if="showModal" @close="showModal = false">
+            <h3 slot="header">Delete Poll</h3>
+          </poll-delete-modal>
+          <div class="col-lg-2 col-sm-6 col-12 my-1">
+            <button @click="showModal = true" class="btn-block btn btn-outline-danger btn-lg float-right ml-2">Delete</button>
+          </div>
+          <div class="col-lg-2 col-sm-6 col-12 my-1">
+            <a href="{% url 'polls:update' poll.id %}" class="btn-block btn btn-outline-primary btn-lg float-right">Edit</a>
+          </div>
+        {% endif %}
       </div>
-      <div class="col-sm-6 pt-3"><pie-chart v-if="choices" v-bind:prop-choices="choices"></pie-chart></div>
+      <div class="card-body row">
+        <div class="col-sm-6 pt-5">
+          <div class="filter">
+            <p>
+              <span class="d-block">{{ poll.title }}</span>
+              <small class="text-secondary">{{ poll.description }}</small>
+            </p>
+            <choices-dropdown id="component-dropdown" v-on:emit-selected="getVote($event)" v-bind:options="dropdownOptions"></choices-dropdown>
+          </div>
+          <button v-on:click="saveVote" class="btn btn-sm btn-primary mt-3">Submit Vote</button>
+        </div>
+        <div class="col-sm-6 pt-3"><pie-chart v-if="choices" v-bind:prop-choices="choices"></pie-chart></div>
+      </div>
     </div>
   </div>
 </div>
 {% endblock content %}
 
-{% block js %}
-  {% if DEBUG %}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
-    <script>
-      let vueDebug = true;
-    </script>
-  {% else %}
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script>
-      let vueDebug = false;
-    </script>
-  {% endif %}
-  <script>
-    let API_ROOT_URL = '{{ API_ROOT_URL }}';
-    let pollId = '{{ poll.id }}';
-    let csrfToken = '{{ csrf_token }}';
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-  <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-  <script src="{% static 'scripts/components.js' %}"></script>
-  <script src="{% static 'scripts/vue.js' %}"></script>
-{% endblock js %}
+{% block extra_js %}
+<script>
+  let myPollUrl = `{% url 'polls:my-polls' %}`;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+<script src="{% static 'scripts/components/choices-dropdown.js' %}"></script>
+<script src="{% static 'scripts/components/poll-delete-modal.js' %}"></script>
+<script src="{% static 'scripts/components/pie-chart.js' %}"></script>
+<script src="{% static 'scripts/vues/detail.js' %}"></script>
+{% endblock extra_js %}

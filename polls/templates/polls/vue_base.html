@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% endblock content %}
+
+{% block js %}
+  {% if DEBUG %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+      let vueDebug = true;
+    </script>
+  {% else %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    <script>
+      let vueDebug = false;
+    </script>
+  {% endif %}
+
+  <script>
+  let API_ROOT_URL = '{{ API_ROOT_URL }}';
+  let pollId = '{{ poll.id }}';
+  let csrfToken = '{{ csrf_token }}';
+  let auth_user_token = 'Token {{ user.auth_token.key }}';
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+
+  {% block extra_js %}
+  {% endblock extra_js %}
+{% endblock js %}
