@@ -21,9 +21,6 @@ Vue.component('choice-edit-form', {
         data: {
           name: this.choice.name
         }
-      })
-      .then(response => {
-        console.log(response);
       });
     },
     loadChoices() {
