@@ -133,6 +133,9 @@
 {% endblock content %}
 
 {% block extra_js %}
+<script>
+  let userId = '{{ user.id }}';
+</script>
 <script src="{% static 'scripts/components/poll-add-form.js' %}"></script>
 <script src="{% static 'scripts/vues/add-poll.js' %}"></script>
 {% endblock extra_js %}
