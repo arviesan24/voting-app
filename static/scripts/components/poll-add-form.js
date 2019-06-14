@@ -14,11 +14,11 @@ Vue.component('poll-add-form', {
           <div class="modal-body">
             <slot name="body">
               <input type="text" v-on:input="pollTitleValidation" v-model="pollTitle" class="form-control my-2" placeholder="Add Title">
-              <small v-if="pollTitleError" class="text-danger">{{pollTitleError}}</small>
+              <small v-if="pollTitleError" class="text-danger">[[pollTitleError]]</small>
               <textarea v-on:input="pollDescriptionValidation" v-model="pollDescription" class="form-control my-2" placeholder="Add Description" rows="3"></textarea>
-              <small v-if="pollDescriptionError" class="text-danger">{{pollDescriptionError}}</small>
+              <small v-if="pollDescriptionError" class="text-danger">[[pollDescriptionError]]</small>
               <textarea v-on:input="pollChoicesValidation" v-model="pollChoices" class="form-control my-2" placeholder="Add Choices (seperated by line)" rows="5"></textarea>
-              <small v-if="pollChoicesError" class="text-danger">{{pollChoicesError}}</small>
+              <small v-if="pollChoicesError" class="text-danger">[[pollChoicesError]]</small>
             </slot>
           </div>
 
@@ -27,7 +27,10 @@ Vue.component('poll-add-form', {
               <button class="btn btn-outline-info" @click="$emit('close')">
                 Cancel
               </button>
-              <button v-bind:disabled="!inputsValid" class="btn btn-info" @click="$emit('close')">
+              <button
+                v-bind:disabled="!inputsValid"
+                class="btn btn-info"
+                v-on:click="emitnewPolls(); $emit('close')">
                 Save
               </button>
             </slot>
@@ -90,6 +93,12 @@ Vue.component('poll-add-form', {
         this.pollChoicesError = null
         return true;
       }
+    },
+    emitnewPolls() {
+      this.$emit('save-poll', {
+        title: this.pollTitle,
+        description: this.pollDescription,
+        choices: this.choicesArray});
     }
   }
 })
