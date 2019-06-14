@@ -30,7 +30,7 @@ Vue.component('poll-add-form', {
               <button
                 v-bind:disabled="!inputsValid"
                 class="btn btn-info"
-                v-on:click="emitnewPolls(); $emit('close')">
+                v-on:click="emitnewPolls(); $parent.saveNewPoll(); $emit('close')">
                 Save
               </button>
             </slot>
