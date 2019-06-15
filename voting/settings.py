@@ -27,7 +27,20 @@ SECRET_KEY = os.getenv(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = json.loads(os.getenv('DEBUG', 'false'))
 
-ALLOWED_HOSTS = json.loads(os.getenv('ALLOWED_HOSTS', '["127.0.0.1:5000"]'))
+# ALLOWED_HOSTS = json.loads(os.getenv('ALLOWED_HOSTS', '["127.0.0.1:5000"]'))
+ALLOWED_HOSTS = (os.getenv('ALLOWED_HOSTS', '127.0.0.1')).split(",")
+
+# Allow HTTPS on the server
+if not DEBUG:
+    CORS_REPLACE_HTTPS_REFERER      = True
+    HOST_SCHEME                     = "https://"
+    SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT             = True
+    SESSION_COOKIE_SECURE           = True
+    CSRF_COOKIE_SECURE              = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
+    SECURE_HSTS_SECONDS             = 1000000
+    SECURE_FRAME_DENY               = True
 
 
 # Application definition
@@ -214,7 +227,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.getenv(
     'STATIC_ROOT',
-    os.path.join(BASE_DIR, 'public', 'static'))
+    os.path.join(os.path.dirname(BASE_DIR), 'public', 'static'))
 
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
 
