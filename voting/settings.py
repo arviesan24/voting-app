@@ -227,7 +227,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.getenv(
     'STATIC_ROOT',
-    os.path.join(BASE_DIR, 'public', 'static'))
+    os.path.join(os.path.dirname(BASE_DIR), 'public', 'static'))
 
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
 
